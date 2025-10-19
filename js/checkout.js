@@ -1,4 +1,4 @@
-import { validateName, validateEmail, validatePhone, validateMinLength, validatePassword } from "./validations.js";
+import { validateName, validateEmail, validatePhone, validateMinLength, validatePassword } from "./validators.js";
 
 const validate = () => {
 	let error = 0;
