@@ -10,70 +10,70 @@ const checkEmail = (email) => email.match(emailPattern);
 const checkMinLength = (value, length) => value.length >= length;
 
 const validateName = (value, errorElement, lengthErrorMessage, lettersErrorMessage) => {	
-  let error = true;
+  let validates = true;
   
   if (!checkMinLength(value, 3)) {
 		errorElement.textContent = lengthErrorMessage;
-    error = false;
+    validates = false;
 	} else if (!checkOnlyLettersSpaceAndDot(value)) {
 		errorElement.textContent = lettersErrorMessage;
-    error = false;
+    validates = false;
 	}
 
-  return error;
+  return validates;
 }
 
 const validateEmail = (value, errorElement, lengthErrorMessage, formatErrorMessage) => {
-	let error = true;
+	let validates = true;
 
   if (!checkMinLength(value, 3)) {
 		errorElement.textContent = lengthErrorMessage;
-		error = false;
+		validates = false;
 	} else if (!checkEmail(value)) {
 		errorElement.textContent = formatErrorMessage;
-		error = false;
+		validates = false;
 	}
 
-  return error;
+  return validates;
 }
 
 const validatePhone = (value, errorElement, lengthErrorMessage, numbersErrorMessage) => {
-	let error = true;
+	let validates = true;
 
   if (value.length !== 9) {
 		errorElement.textContent = lengthErrorMessage;
-		error = false;
+		validates = false;
 	} else if (!checkOnlyNumbers(value)) {
 		errorElement.textContent = numbersErrorMessage;
-		error = false;
+		validates = false;
 	}
 
-  return error;
+  return validates;
 }
 
 const validatePassword = (value, errorElement, lengthErrorMessage, lettersNumbersErrorMessage) => {
-	let error = true;
+	let validates = true;
 
   if (!checkMinLength(value, 4)) {
 		errorElement.textContent = lengthErrorMessage;
-		error = false;
+		validates = false;
 	} else if (!checkLettersAndNumbers(value)) {
 		errorElement.textContent = lettersNumbersErrorMessage;
-		error = false;
+		validates = false;
 	}
 
-  return error;
+  return validates;
 }
 
 const validateMinLength = (value, errorElement, lengthErrorMessage) => {
-  let error = true;
+  let validates = true;
 
   if (value.length < length) {
     errorElement.textContent = lengthErrorMessage;
-    error = false;
+    validates = false;
   }
 
-  return error;
+  return validates;
 }
 
 export { validateName, validateEmail, validatePhone, validatePassword, validateMinLength }

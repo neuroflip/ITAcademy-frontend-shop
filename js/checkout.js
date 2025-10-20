@@ -17,6 +17,8 @@ const validate = () => {
 	const errorPassword = document.getElementById("errorPassword");
 	const formElement = document.querySelector(".form");
 
+	//const submitButton = document.getElementById('btn');
+
 	if (!validateName(fName.value, errorName, "The name must have at least 3 characters", "The name must contain only letters, spaces or dots")) {
 		fName.classList.add('is-invalid');
 		fName.classList.remove('is-valid');
@@ -34,7 +36,6 @@ const validate = () => {
 		fLastN.classList.remove('is-invalid');
 		fLastN.classList.add('is-valid');
 	}
-
 
 	if (!validateEmail(fEmail.value, errorEmail, "The email must have at least 3 characters", "The email is not a correct email")) {
 		fEmail.classList.add('is-invalid');
@@ -72,6 +73,13 @@ const validate = () => {
 		fPassword.classList.add('is-valid');
 	}
  
+	/*
+	if (error > 0) {
+		submitButton.disabled = true;
+	} else {
+		submitButton.disabled = false;
+	} */
+
 	formElement.classList.add('was-validated');
 
 	return false;
