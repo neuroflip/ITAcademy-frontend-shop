@@ -1,5 +1,7 @@
 import { prepareModalToOpen } from './modal.js';
-import { addToCard, cleanCart, printCart } from './cart/cart.js';
+import CartManager from './CartManager/CartManager.js';
+
+const cart = new CartManager();
 
 const prepareProductAddToCartInteraction = () => {
     const buttons = document.querySelectorAll('button[data-product-id]');
@@ -7,7 +9,7 @@ const prepareProductAddToCartInteraction = () => {
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
             const id = button.dataset.productId;
-            addToCard(id);
+            cart.addToCard(id);
         });
     });
 }
@@ -16,12 +18,12 @@ const prepareCleanCartInteraction = () => {
     const button = document.getElementById('clean-cart');
 
     button.addEventListener('click', () => {
-        cleanCart();
+        cart.cleanCart();
     });
 }
 
 const open_modal = () =>  {
-    printCart();
+    cart.printCart();
 }
 
 prepareProductAddToCartInteraction();
