@@ -1,5 +1,7 @@
 import CheckoutFormValidator from "./CheckoutFormValidator/CheckoutFormValidator.js";
 
+const formValidator = new CheckoutFormValidator();
+
 const formSubmitEventHandler = () => {
 	const button = document.getElementById('btn');
 
@@ -10,5 +12,16 @@ const formSubmitEventHandler = () => {
 	})
 }
 
-const formValidator = new CheckoutFormValidator();
+const formButtonDisabledStateManagement = () => {
+	const inputs = document.querySelectorAll('input[required]');
+	const button = document.getElementById('btn');
+
+	inputs.forEach((input) => {
+		input.addEventListener('keyup', () => {
+			button.setAttribute('disabled', !formValidator.isValid());
+		})
+	})
+}
+
 formSubmitEventHandler();
+formButtonDisabledStateManagement();

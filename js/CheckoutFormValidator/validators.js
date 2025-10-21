@@ -5,31 +5,41 @@ const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const checkOnlyLettersSpaceAndDot = (name) => name.match(lettersPattern);
 const checkLettersAndNumbers = (value) => value.match(lettersAndNumbersPattern);
-const checkOnlyNumbers = (number) => number.match(numbersPattern); 
+const checkOnlyNumbers = (number) => number.match(numbersPattern);
 const checkEmail = (email) => email.match(emailPattern);
 const checkMinLength = (value, length) => value.length >= length;
 
-const validateName = (value, errorElement, lengthErrorMessage, lettersErrorMessage) => {	
-  let validates = true;
+const isValidNameLength = (value) => checkMinLength(value, 3);
+const isValidNameContent = (value) => checkOnlyLettersSpaceAndDot(value);
+const isValidEmailLength = (value) => checkMinLength(value, 3);
+const isValidEmailFormat = (value) => checkEmail(value);
+const isValidPhoneLength = (value) => value.length === 9;
+const isValidPhoneContent = (value) => checkOnlyNumbers(value);
+const isValidPasswordLength = (value) => checkMinLength(value, 4);
+const isValidPasswordContent = (value) => checkLettersAndNumbers(value);
+const isValidAdressLength = (value) => checkMinLength(value, 3);
 
-  if (!checkMinLength(value, 3)) {
+const validateNameAndShowError = (value, errorElement, lengthErrorMessage, lettersErrorMessage) => {
+  	let validates = true;
+
+  	if (!isValidNameLength(value)) {
 		errorElement.textContent = lengthErrorMessage;
-    validates = false;
-	} else if (!checkOnlyLettersSpaceAndDot(value)) {
+    	validates = false;
+	} else if (!isValidNameContent(value)) {
 		errorElement.textContent = lettersErrorMessage;
-    validates = false;
+    	validates = false;
 	}
 
   return validates;
 }
 
-const validateEmail = (value, errorElement, lengthErrorMessage, formatErrorMessage) => {
+const validateEmailAndShowError = (value, errorElement, lengthErrorMessage, formatErrorMessage) => {
 	let validates = true;
 
-  if (!checkMinLength(value, 3)) {
+  	if (!isValidEmailLength(value)) {
 		errorElement.textContent = lengthErrorMessage;
 		validates = false;
-	} else if (!checkEmail(value)) {
+	} else if (!isValidEmailFormat(value)) {
 		errorElement.textContent = formatErrorMessage;
 		validates = false;
 	}
@@ -37,13 +47,13 @@ const validateEmail = (value, errorElement, lengthErrorMessage, formatErrorMessa
   return validates;
 }
 
-const validatePhone = (value, errorElement, lengthErrorMessage, numbersErrorMessage) => {
+const validatePhoneAndShowError = (value, errorElement, lengthErrorMessage, numbersErrorMessage) => {
 	let validates = true;
 
-  if (value.length !== 9) {
+  	if (!isValidPhoneLength(value)  ) {
 		errorElement.textContent = lengthErrorMessage;
 		validates = false;
-	} else if (!checkOnlyNumbers(value)) {
+	} else if (!isValidPhoneContent(value)) {
 		errorElement.textContent = numbersErrorMessage;
 		validates = false;
 	}
@@ -51,13 +61,13 @@ const validatePhone = (value, errorElement, lengthErrorMessage, numbersErrorMess
   return validates;
 }
 
-const validatePassword = (value, errorElement, lengthErrorMessage, lettersNumbersErrorMessage) => {
+const validatePasswordAndShowError = (value, errorElement, lengthErrorMessage, lettersNumbersErrorMessage) => {
 	let validates = true;
 
-  if (!checkMinLength(value, 4)) {
+  if (!isValidPasswordLength(value)) {
 		errorElement.textContent = lengthErrorMessage;
 		validates = false;
-	} else if (!checkLettersAndNumbers(value)) {
+	} else if (!isValidPasswordContent(value)) {
 		errorElement.textContent = lettersNumbersErrorMessage;
 		validates = false;
 	}
@@ -65,10 +75,10 @@ const validatePassword = (value, errorElement, lengthErrorMessage, lettersNumber
   return validates;
 }
 
-const validateMinLength = (value, errorElement, lengthErrorMessage) => {
+const validateAdressAndShowError = (value, errorElement, lengthErrorMessage) => {
   let validates = true;
 
-  if (value.length < length) {
+  if (!isValidAdressLength(value)) {
     errorElement.textContent = lengthErrorMessage;
     validates = false;
   }
@@ -76,4 +86,6 @@ const validateMinLength = (value, errorElement, lengthErrorMessage) => {
   return validates;
 }
 
-export { validateName, validateEmail, validatePhone, validatePassword, validateMinLength }
+export { validateNameAndShowError, validateEmailAndShowError, validatePhoneAndShowError, validatePasswordAndShowError, validateAdressAndShowError,
+	isValidNameLength, isValidNameContent, isValidEmailLength, isValidEmailFormat, isValidPhoneLength, isValidPhoneContent,
+	isValidPasswordLength, isValidPasswordContent, isValidAdressLength };

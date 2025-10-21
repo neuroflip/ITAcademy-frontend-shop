@@ -1,10 +1,25 @@
 
-import { validateName, validateEmail, validatePhone, validatePassword, validateMinLength } from './validators.js';
+import { validateNameAndShowError, validateEmailAndShowError, validatePhoneAndShowError, validatePasswordAndShowError,
+  validateAdressAndShowError,isValidNameLength, isValidNameContent, isValidEmailLength, isValidEmailFormat, isValidPhoneLength, isValidPhoneContent,
+	isValidPasswordLength, isValidPasswordContent, isValidAdressLength } from './validators.js';
 
 const INVALIDCLASS = 'is-invalid';
 const VALIDCLASS = 'is-valid';
 
 class CheckoutFormValidator {
+  isValid () {
+    const fName = document.getElementById("fName");
+    const fLastN = document.getElementById("fLastN");
+    const fAddress = document.getElementById("fAddress");
+    const fPassword = document.getElementById("fPassword");
+    const fPhone = document.getElementById("fPhone");
+    const fEmail = document.getElementById("fEmail");
+
+    return isValidNameLength(fName) && isValidNameContent(fName) && isValidNameLength(fLastN) && isValidNameContent(fLastN) &&
+      isValidEmailLength(fEmail) && isValidEmailFormat(fEmail) && isValidPhoneLength(fPhone) && isValidPhoneContent(fPhone) &&
+      isValidPasswordLength(fPassword) && isValidPasswordContent(fPassword) && isValidAdressLength(fAddress);
+  }
+
   validate() {
     let error = 0;
     const fName = document.getElementById("fName");
@@ -22,9 +37,7 @@ class CheckoutFormValidator {
     const errorPassword = document.getElementById("errorPassword");
     const formElement = document.querySelector(".form");
 
-    //const submitButton = document.getElementById('btn');
-
-    if (!validateName(fName.value, errorName, "The name must have at least 3 characters", "The name must contain only letters, spaces or dots")) {
+    if (!validateNameAndShowError(fName.value, errorName, "The name must have at least 3 characters", "The name must contain only letters, spaces or dots")) {
       fName.classList.add(INVALIDCLASS);
       fName.classList.remove(VALIDCLASS);
       error++;
@@ -33,7 +46,7 @@ class CheckoutFormValidator {
       fName.classList.add(VALIDCLASS);
     }
 
-    if (!validateName(fLastN.value, errorLastName, "The last name must have at least 3 characters", "The last name must contain only letters, spaces or dots")) {
+    if (!validateNameAndShowError(fLastN.value, errorLastName, "The last name must have at least 3 characters", "The last name must contain only letters, spaces or dots")) {
       fLastN.classList.add(INVALIDCLASS);
       fLastN.classList.remove(VALIDCLASS);
       error++;
@@ -42,16 +55,16 @@ class CheckoutFormValidator {
       fLastN.classList.add(VALIDCLASS);
     }
 
-    if (!validateEmail(fEmail.value, errorEmail, "The email must have at least 3 characters", "The email is not a correct email")) {
+    if (!validateEmailAndShowError(fEmail.value, errorEmail, "The email must have at least 3 characters", "The email is not a correct email")) {
       fEmail.classList.add(INVALIDCLASS);
       fEmail.classList.remove(VALIDCLASS);
       error++;
     } else {
       fEmail.classList.remove(INVALIDCLASS);
       fEmail.classList.add(VALIDCLASS);
-    }	
+    }
 
-    if (!validatePhone(fPhone.value, errorPhone, "The phone number must be 9 digits with no letters", "The phone must contain only numbers")) {
+    if (!validatePhoneAndShowError(fPhone.value, errorPhone, "The phone number must be 9 digits with no letters", "The phone must contain only numbers")) {
       fPhone.classList.add(INVALIDCLASS);
       fPhone.classList.remove(VALIDCLASS);
       error++;
@@ -60,7 +73,7 @@ class CheckoutFormValidator {
       fPhone.classList.add(VALIDCLASS);
     }
 
-    if (!validateMinLength(fAddress.value, errorAddress, "The address must have at least 3 characters")) {
+    if (!validateAdressAndShowError(fAddress.value, errorAddress, "The address must have at least 3 characters")) {
       fAddress.classList.add(INVALIDCLASS);
       fAddress.classList.remove(VALIDCLASS);
       error++;
@@ -69,7 +82,7 @@ class CheckoutFormValidator {
       fAddress.classList.add(VALIDCLASS);
     }
 
-    if (!validatePassword(fPassword.value, errorPassword, "The password must have at least 4 characters", "The password must contain only numbers or letters")) {
+    if (!validatePasswordAndShowError(fPassword.value, errorPassword, "The password must have at least 4 characters", "The password must contain only numbers or letters")) {
       fPassword.classList.add(INVALIDCLASS);
       fPassword.classList.remove(VALIDCLASS);
       error++;
@@ -78,16 +91,9 @@ class CheckoutFormValidator {
       fPassword.classList.add(VALIDCLASS);
     }
 
-    /*
-    if (error > 0) {
-      submitButton.disabled = true;
-    } else {
-      submitButton.disabled = false;
-    } */
-
     formElement.classList.add('was-validated');
 
-    return false;
+    return error === 0;
   }
 }
 
