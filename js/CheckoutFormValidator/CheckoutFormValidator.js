@@ -5,10 +5,6 @@ const INVALIDCLASS = 'is-invalid';
 const VALIDCLASS = 'is-valid';
 
 class CheckoutFormValidator {
-  constructor() {
-
-  }
-
   validate() {
     let error = 0;
     const fName = document.getElementById("fName");
@@ -21,7 +17,7 @@ class CheckoutFormValidator {
     const errorName = document.getElementById("errorName");
     const errorLastName = document.getElementById("errorLastN");
     const errorPhone = document.getElementById("errorPhone");
-    const errorEmail = document.getElementById("errorEmail");  
+    const errorEmail = document.getElementById("errorEmail");
     const errorAddress = document.getElementById("errorAddress");
     const errorPassword = document.getElementById("errorPassword");
     const formElement = document.querySelector(".form");
@@ -72,7 +68,7 @@ class CheckoutFormValidator {
       fAddress.classList.remove(INVALIDCLASS);
       fAddress.classList.add(VALIDCLASS);
     }
-    
+
     if (!validatePassword(fPassword.value, errorPassword, "The password must have at least 4 characters", "The password must contain only numbers or letters")) {
       fPassword.classList.add(INVALIDCLASS);
       fPassword.classList.remove(VALIDCLASS);
@@ -81,7 +77,7 @@ class CheckoutFormValidator {
       fPassword.classList.remove(INVALIDCLASS);
       fPassword.classList.add(VALIDCLASS);
     }
-  
+
     /*
     if (error > 0) {
       submitButton.disabled = true;

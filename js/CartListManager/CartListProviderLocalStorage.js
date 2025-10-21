@@ -4,7 +4,7 @@ const SOTRAGE_KEY = 'ITAcademy/shopping-cart';
 class CartListLocalStorage {
   getCartList() {
     const cartList = localStorage.getItem(SOTRAGE_KEY);
-    
+
     return cartList ? JSON.parse(cartList) : [];
   }
 

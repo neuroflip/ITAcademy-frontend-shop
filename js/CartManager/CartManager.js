@@ -1,14 +1,14 @@
 import products from "../../data/products.js";
 import { getDiscountPrice } from "./cartUtilities.js";
-import CartListProvider from "../CartList/CartListProvider.js";
-import CartListLocalStorage from "../CartList/CartListLocalStorage.js";
+import CartListManager from "../CartListManager/CartListManager.js";
+import CartListProvider from "../CartListManager/CartListProviderLocalStorage.js";
 import { createCartTableElements, createOperationColumnWithButtons, appendCartChildElements, roundTwoDecimals,
   calculateTotal, showEmptyCart, showFullCart } from "./cartUtilities.js";
 
 class CartManager {
     constructor() {
-        this.cartListProvider = new CartListProvider(new CartListLocalStorage());
-        this.cartList = this.cartListProvider.getCartList();
+        this.CartListManager = new CartListManager(new CartListProvider());
+        this.cartList = this.CartListManager.getCartList();
     }
 
     addToCard(id) {
@@ -25,7 +25,7 @@ class CartManager {
             this.cartList.push(productToAdd);
         }
 
-        this.cartListProvider.setCartList(this.cartList);
+        this.CartListManager.setCartList(this.cartList);
     }
 
     printCart() {
@@ -51,7 +51,7 @@ class CartManager {
     cleanCart() {
         this.cartList = [];
         this.printCart();
-        this.cartListProvider.setCartList(this.cartList);
+        this.CartListManager.setCartList(this.cartList);
     }
 
     removeFromCart(id) {
@@ -70,7 +70,7 @@ class CartManager {
             this.#applyPromotionsCart();
         }
 
-        this.cartListProvider.setCartList(this.cartList);
+        this.CartListManager.setCartList(this.cartList);
     }
 
     #printProduct(product, tbodyElement) {
@@ -81,25 +81,25 @@ class CartManager {
         tdPrice.textContent = `$${product.price}`;
         tdQuantity.textContent = product.quantity;
         tdSubtotalPrice.textContent = `$${roundTwoDecimals(product.subtotalWithDiscount)}`;
-        createOperationColumnWithButtons(tdOperation, 
-            () => { 
-                this.addToCard(product.id); 
-                this.printCart(); 
-            }, () => { 
+        createOperationColumnWithButtons(tdOperation,
+            () => {
+                this.addToCard(product.id);
+                this.printCart();
+            }, () => {
                 this.removeFromCart(product.id);
-                this.printCart(); 
+                this.printCart();
             });
         appendCartChildElements(tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation);
         tbodyElement.appendChild(tr);
     }
-    
-    #applyPromotionsCart() {   
+
+    #applyPromotionsCart() {
         this.cartList.forEach((product) => {
             if (product.offer && product.offer.number && product.offer.percent) {
                 if(product.quantity >= product.offer.number) {
                     product.subtotalWithDiscount = product.quantity * getDiscountPrice(product.price, product.offer.percent / 100);
                 } else {
-                    product.subtotalWithDiscount = product.price * product.quantity;    
+                    product.subtotalWithDiscount = product.price * product.quantity;
                 }
             } else {
                 product.subtotalWithDiscount = product.price * product.quantity;
