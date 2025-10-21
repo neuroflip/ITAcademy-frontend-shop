@@ -1,7 +1,7 @@
 import products from "../../data/products.js";
 import { getDiscountPrice } from "./cartUtilities.js";
 import CartListManager from "../CartListManager/CartListManager.js";
-import CartListProvider from "../CartListManager/CartListProviderLocalStorage.js";
+import CartListProvider from "../CartListManager/providers/CartListProviderLocalStorage.js";
 import { createCartTableElements, createOperationColumnWithButtons, appendCartChildElements, roundTwoDecimals,
   calculateTotal, showEmptyCart, showFullCart } from "./cartUtilities.js";
 

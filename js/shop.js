@@ -1,6 +1,6 @@
 import { prepareModalToOpen } from './modal.js';
 import CartManager from './CartManager/CartManager.js';
-import CartListLocalStorage from './CartListManager/CartListProviderLocalStorage.js';
+import CartListLocalStorage from './CartListManager/providers/CartListProviderLocalStorage.js';
 
 const cart = new CartManager();
 
