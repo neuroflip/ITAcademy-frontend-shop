@@ -2,65 +2,51 @@
 
 ## Introduction
 
-A company in the e-commerce sector has asked us for a web application that allows them to offer the purchase of their products through the internet.
-
-You will be in charge of setting up an initial demo version of the application for the client: management of the shopping cart and the application of the promotions on the final price. You have 1 week to finish this part of sprint (2.2).
 
 <br>
 
-## Requirements
+## Install and run
 
 
 1. Clone this repo
 ```bash
-$ git clone https://github.com/IT-Academy-BCN/starter-code-frontend-shop
+$ git clone https://github.com/neuroflip/ITAcademy-frontend-shop.git
 ```
-
-2. Unlink your repo from the itacademy repository.
-(Explanation: You have to upload the code to your GitHub repository, not to the IT Academy. That's why you have to unlink your project from IT Academy GitHub with the following command)
-
+2. Install the dependencies
 ```bash
-$ git remote rm origin
+$ npm install
 ```
-
-3. Link your repo to the repository you have to create in your github account
-(Explanation: Now your project is not linked to any remote repository. In order to upload your code, you have to link your project to the new repository created on github.com using the following command)
-
+3. Build the project
 ```bash
-$ git remote add origin <your repo name!>
+$ npm run build
+```
+4. Run the project in production mode:
+```bash
+$ npm run preview
 ```
 
-<br>
-
-## Submission
-
-1. It is necessary to upload each exercise in a separate commit. The commit name must clearly indicate its content.
-
-2. Upload the link to your GitHub repository to the virtual campus, enabling your mentor to review and provide feedback.
-
-
+Or run the project in developement mode:
+```bash
+$ npm run dev
+```
 
 <br>
 
 ## Introduction
 
-The statement of the exercise is available on the virtual campus.
 
 <br>
 
 
-## Instructions
+## Project structure
 
-You have the following indications from the frontend manager:
+## Considerations
 
-- You have prepared the base of the project on which you will work: https://github.com/IT-Academy-BCN/starter-code-frontend-shop
+- ***Object oriented*** code (CartListManager, CartManager and CheckoutFormValidator)
+- the cart is managed using the ***js/CartManager/CartManager.js*** offering the main logic to add, remove or print the cart. It uses ***CartManager/cartUtilities.js*** that implements some functions as utilities for the CartManager. It manages the dom manipulation operations mainly.
+- the cart list is managed by ***CartListManager/CartListManager.js***. It uses a data provider to manage the cart list items. The providers are implemented at ***CartListManager/providers/*** There are 2 implemented CartList data providers: ***CartListManager/providers/CartListMemoryProvider.js*** (that stores the cart data using an array in memory so it does not do persistance) and ***CartListManager/providers/CartListLocalStorageProvider.js*** (that stores the cart list in localstorage providing persistance between page loads and different pages). The dependency injection is done at CartManager constructor. This dependency injection decouples dependencies between the CartListManager and the data provider resulting in a more modular and clean code. This provides reusability, easy testing and maintenability.
+- The ***CheckoutFormValidator/CheckoutFormValidator.js*** implements the Form validation using the individual validators in validators.js
+- This way shop.js, modal.js and shop.js are just preparing the ui interaction and not managing the main logic of the site providing a clean arquitecture.
 
-- The base of the project on which you will work has already created all the files, and an initial version of the interface, so you can focus on programming the logic.
 
-- As at the moment we don't consume data from a server using an API, we will work with hardcoded data in the application. For the moment we will implement the logic using a small group of 9 products divided in 3 sections.
 
-- Except for the last level, showing the result of the functions by console is enough.
-
-- The logic to implement will be placed in the src/grocery.js and src/checkout.js files. You will see that the built in functions have already been created for you to implement them.
-
-- It is forbidden to copy the code, since this way you don't learn anything. Furthermore, as you can see, the second release of sprint 5 is a mini-level test with the mentor, in which you will have to demonstrate live that you have acquired the javascript concepts. Don't worry, if you work on the releases you won't have any problems.
