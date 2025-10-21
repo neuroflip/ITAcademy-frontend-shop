@@ -18,7 +18,13 @@ const formButtonDisabledStateManagement = () => {
 
 	inputs.forEach((input) => {
 		input.addEventListener('keyup', () => {
-			button.setAttribute('disabled', !formValidator.isValid());
+			const isValid = formValidator.validate();
+
+			if (!isValid) {
+				button.setAttribute('disabled', '');
+			} else {
+				button.removeAttribute('disabled');
+			}
 		})
 	})
 }

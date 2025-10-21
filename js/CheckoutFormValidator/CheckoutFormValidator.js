@@ -8,16 +8,17 @@ const VALIDCLASS = 'is-valid';
 
 class CheckoutFormValidator {
   isValid () {
-    const fName = document.getElementById("fName");
-    const fLastN = document.getElementById("fLastN");
-    const fAddress = document.getElementById("fAddress");
-    const fPassword = document.getElementById("fPassword");
-    const fPhone = document.getElementById("fPhone");
-    const fEmail = document.getElementById("fEmail");
+    const fName = document.getElementById("fName").value;
+    const fLastN = document.getElementById("fLastN").value;
+    const fAddress = document.getElementById("fAddress").value;
+    const fPassword = document.getElementById("fPassword").value;
+    const fPhone = document.getElementById("fPhone").value;
+    const fEmail = document.getElementById("fEmail").value;
 
-    return isValidNameLength(fName) && isValidNameContent(fName) && isValidNameLength(fLastN) && isValidNameContent(fLastN) &&
-      isValidEmailLength(fEmail) && isValidEmailFormat(fEmail) && isValidPhoneLength(fPhone) && isValidPhoneContent(fPhone) &&
-      isValidPasswordLength(fPassword) && isValidPasswordContent(fPassword) && isValidAdressLength(fAddress);
+    return isValidNameLength(fName) && isValidNameContent(fName) && isValidNameLength(fLastN) && 
+      isValidNameContent(fLastN) && isValidEmailLength(fEmail) && isValidEmailFormat(fEmail) && 
+      isValidPhoneLength(fPhone) && isValidPhoneContent(fPhone) && isValidPasswordLength(fPassword) &&
+      isValidPasswordContent(fPassword) && isValidAdressLength(fAddress);
   }
 
   validate() {

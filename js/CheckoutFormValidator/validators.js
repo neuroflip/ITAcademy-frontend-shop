@@ -10,23 +10,23 @@ const checkEmail = (email) => email.match(emailPattern);
 const checkMinLength = (value, length) => value.length >= length;
 
 const isValidNameLength = (value) => checkMinLength(value, 3);
-const isValidNameContent = (value) => checkOnlyLettersSpaceAndDot(value);
+const isValidNameContent = (value) => Boolean(checkOnlyLettersSpaceAndDot(value));
 const isValidEmailLength = (value) => checkMinLength(value, 3);
-const isValidEmailFormat = (value) => checkEmail(value);
+const isValidEmailFormat = (value) => Boolean(checkEmail(value));
 const isValidPhoneLength = (value) => value.length === 9;
-const isValidPhoneContent = (value) => checkOnlyNumbers(value);
+const isValidPhoneContent = (value) => Boolean(checkOnlyNumbers(value));
 const isValidPasswordLength = (value) => checkMinLength(value, 4);
-const isValidPasswordContent = (value) => checkLettersAndNumbers(value);
+const isValidPasswordContent = (value) => Boolean(checkLettersAndNumbers(value));
 const isValidAdressLength = (value) => checkMinLength(value, 3);
 
 const validateNameAndShowError = (value, errorElement, lengthErrorMessage, lettersErrorMessage) => {
   	let validates = true;
 
   	if (!isValidNameLength(value)) {
-		errorElement.textContent = lengthErrorMessage;
+			errorElement.textContent = lengthErrorMessage;
     	validates = false;
 	} else if (!isValidNameContent(value)) {
-		errorElement.textContent = lettersErrorMessage;
+			errorElement.textContent = lettersErrorMessage;
     	validates = false;
 	}
 
