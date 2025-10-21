@@ -142,9 +142,10 @@
 					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body text-center" id="modal-cart-body">
 					<h3 class="text-center bill px-5">Shopping Cart</h3>
-					<div class="table-responsive">
+					<h1 id="modal-cart-empty" class="text-center modal-cart-empty py-5">🛒 The card is empty</h1>
+					<div class="table-responsive" id="modal-cart-table">
 						<table class="table">
 							<thead>
 								<tr>
@@ -155,14 +156,14 @@
 									<th scope="col">Add / Remove</th>
 								</tr>
 							</thead>
-							<tbody id="cart_list">
+							<tbody id="cart-list">
 							</tbody>
 						</table>
 					</div>
-					<div class="text-center fs-3">
+					<div class="text-center fs-3" id="modal-cart-total">
 						Total: $<span id="total_price"></span>
 					</div>
-					<div class="text-center">
+					<div class="text-center" id="modal-cart-buttons">
 						<a href="checkout.html" class="btn btn-primary m-3">Checkout</a>
 						<button type="button" class="btn btn-secondary m-3" id="clean-cart">Clean Cart</button>
 					</div>

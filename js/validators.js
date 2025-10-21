@@ -11,7 +11,7 @@ const checkMinLength = (value, length) => value.length >= length;
 
 const validateName = (value, errorElement, lengthErrorMessage, lettersErrorMessage) => {	
   let validates = true;
-  
+
   if (!checkMinLength(value, 3)) {
 		errorElement.textContent = lengthErrorMessage;
     validates = false;

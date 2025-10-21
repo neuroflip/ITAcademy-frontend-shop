@@ -1,8 +1,11 @@
 import products from "../../data/products.js";
 import { getDiscountPrice } from "./cartUtilities.js";
+import CartListProvider from "../CartList/CartListProvider.js";
+import CartListLocalStorage from "../CartList/CartListLocalStorage.js";
 import { createCartTableElements, createOperationColumnWithButtons, appendCartChildElements, roundTwoDecimals, calculateTotal } from "./cartUtilities.js";
 
-let cartList = [];
+const cartListProvider = new CartListProvider(new CartListLocalStorage());
+const cartList = cartListProvider.getCartList();
 
 const addToCard = (id) => {
     const productIsEqual = (product, id) => product.id === id;
@@ -17,6 +20,8 @@ const addToCard = (id) => {
         productToAdd.quantity = 1;
         cartList.push(productToAdd);
     }
+
+    cartListProvider.setCartList(cartList);
 }
 
 const applyPromotionsCart = () =>  {   
@@ -90,6 +95,7 @@ const printProduct = (product, tbodyElement) => {
 const cleanCart = () =>  {
     cartList = [];
     printCart();
+    cartListProvider.setCartList(cartList);
 }
 
 const removeFromCart = (id) => {
@@ -107,6 +113,8 @@ const removeFromCart = (id) => {
     } else {
         applyPromotionsCart();
     }
+
+    cartListProvider.setCartList(cartList);
 }
 
 export { addToCard, cleanCart, printCart };
