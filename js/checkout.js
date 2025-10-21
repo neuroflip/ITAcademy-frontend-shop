@@ -1,5 +1,8 @@
 import { validateName, validateEmail, validatePhone, validateMinLength, validatePassword } from "./validators.js";
 
+const INVALIDCLASS = 'is-invalid';
+const VALIDCLASS = 'is-valid';
+
 const validate = () => {
 	let error = 0;
 	const fName = document.getElementById("fName");
@@ -20,57 +23,57 @@ const validate = () => {
 	//const submitButton = document.getElementById('btn');
 
 	if (!validateName(fName.value, errorName, "The name must have at least 3 characters", "The name must contain only letters, spaces or dots")) {
-		fName.classList.add('is-invalid');
-		fName.classList.remove('is-valid');
+		fName.classList.add(INVALIDCLASS);
+		fName.classList.remove(VALIDCLASS);
 		error++;
 	} else {
-		fName.classList.remove('is-invalid');
-		fName.classList.add('is-valid');
+		fName.classList.remove(INVALIDCLASS);
+		fName.classList.add(VALIDCLASS);
 	}
 
 	if (!validateName(fLastN.value, errorLastName, "The last name must have at least 3 characters", "The last name must contain only letters, spaces or dots")) {
-		fLastN.classList.add('is-invalid');
-		fLastN.classList.remove('is-valid');
+		fLastN.classList.add(INVALIDCLASS);
+		fLastN.classList.remove(VALIDCLASS);
 		error++;
 	} else {
-		fLastN.classList.remove('is-invalid');
-		fLastN.classList.add('is-valid');
+		fLastN.classList.remove(INVALIDCLASS);
+		fLastN.classList.add(VALIDCLASS);
 	}
 
 	if (!validateEmail(fEmail.value, errorEmail, "The email must have at least 3 characters", "The email is not a correct email")) {
-		fEmail.classList.add('is-invalid');
-		fEmail.classList.remove('is-valid');
+		fEmail.classList.add(INVALIDCLASS);
+		fEmail.classList.remove(VALIDCLASS);
 		error++;
 	} else {
-		fEmail.classList.remove('is-invalid');
-		fEmail.classList.add('is-valid');
+		fEmail.classList.remove(INVALIDCLASS);
+		fEmail.classList.add(VALIDCLASS);
 	}	
 
 	if (!validatePhone(fPhone.value, errorPhone, "The phone number must be 9 digits with no letters", "The phone must contain only numbers")) {
-		fPhone.classList.add('is-invalid');
-		fPhone.classList.remove('is-valid');
+		fPhone.classList.add(INVALIDCLASS);
+		fPhone.classList.remove(VALIDCLASS);
 		error++;
 	} else {
-		fPhone.classList.remove('is-invalid');
-		fPhone.classList.add('is-valid');
+		fPhone.classList.remove(INVALIDCLASS);
+		fPhone.classList.add(VALIDCLASS);
 	}
 
 	if (!validateMinLength(fAddress.value, errorAddress, "The address must have at least 3 characters")) {
-		fAddress.classList.add('is-invalid');
-		fAddress.classList.remove('is-valid');
+		fAddress.classList.add(INVALIDCLASS);
+		fAddress.classList.remove(VALIDCLASS);
 		error++;
 	} else {
-		fAddress.classList.remove('is-invalid');
-		fAddress.classList.add('is-valid');
+		fAddress.classList.remove(INVALIDCLASS);
+		fAddress.classList.add(VALIDCLASS);
 	}
 	
 	if (!validatePassword(fPassword.value, errorPassword, "The password must have at least 4 characters", "The password must contain only numbers or letters")) {
-		fPassword.classList.add('is-invalid');
-		fPassword.classList.remove('is-valid');
+		fPassword.classList.add(INVALIDCLASS);
+		fPassword.classList.remove(VALIDCLASS);
 		error++;
 	} else {
-		fPassword.classList.remove('is-invalid');
-		fPassword.classList.add('is-valid');
+		fPassword.classList.remove(INVALIDCLASS);
+		fPassword.classList.add(VALIDCLASS);
 	}
  
 	/*
@@ -88,8 +91,9 @@ const validate = () => {
 const formSubmitEventHandler = () => {
 	const button = document.getElementById('btn');
 
-	button && button.addEventListener('click', (event) => {
+	button.addEventListener('click', (event) => {
 		event.preventDefault();
+
 		validate();
 	})
 }

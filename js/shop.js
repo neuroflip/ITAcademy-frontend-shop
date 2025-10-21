@@ -1,5 +1,5 @@
 import { prepareModalToOpen } from './modal.js';
-import { addToCard, cleanCart, printCart } from './cart.js';
+import { addToCard, cleanCart, printCart } from './cart/cart.js';
 
 const prepareProductAddToCartInteraction = () => {
     const buttons = document.querySelectorAll('button[data-product-id]');
@@ -15,7 +15,7 @@ const prepareProductAddToCartInteraction = () => {
 const prepareCleanCartInteraction = () => {
     const button = document.getElementById('clean-cart');
 
-    button && button.addEventListener('click', () => {
+    button.addEventListener('click', () => {
         cleanCart();
     });
 }

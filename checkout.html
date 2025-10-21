@@ -132,24 +132,39 @@
 		</div>
 	</footer>
 
-	<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-cart-arrow-down"></i> My Cart</h5>
+					<h5 class="modal-title" id="cartModalLabel">
+						<i class="fas fa-cart-arrow-down" aria-hidden="true"></i>
+						My Cart
+					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div>
-						<ul class="list">
-
-						</ul>
-						<div>
-							<h3 class="text-center bill px-5">Select Something</h3>
-						</div>
-						<div class="text-center">
-							<a href="checkout.html" class="btn btn-primary m-3">Checkout</a>
-						</div>
+					<h3 class="text-center bill px-5">Shopping Cart</h3>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Product</th>
+									<th scope="col">Price</th>
+									<th scope="col">Qty.</th>
+									<th scope="col">Total <small>(with discount)</small></th>
+									<th scope="col">Add / Remove</th>
+								</tr>
+							</thead>
+							<tbody id="cart_list">
+							</tbody>
+						</table>
+					</div>
+					<div class="text-center fs-3">
+						Total: $<span id="total_price"></span>
+					</div>
+					<div class="text-center">
+						<a href="checkout.html" class="btn btn-primary m-3">Checkout</a>
+						<button type="button" class="btn btn-secondary m-3" id="clean-cart">Clean Cart</button>
 					</div>
 				</div>
 			</div>
