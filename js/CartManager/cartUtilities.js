@@ -15,7 +15,7 @@ const createOperationButton = (text) => {
     const button = document.createElement('button');
 
     button.textContent = text;
-    button.classList.add('rounded-3');
+    button.className = `btn btn-outline-dark ${text === '-' ? 'm-1' : ''} rounded-3`;
 
     return button;
 }

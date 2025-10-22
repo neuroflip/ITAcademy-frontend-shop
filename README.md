@@ -2,11 +2,13 @@
 
 ## Introduction
 
+![alt basic screenshot from the project](https://github.com/neuroflip/ITAcademy-frontend-shop/blob/main/etc/screenshot.png)
 
 <br>
 
-## Install and run
+This repo contains the solution for the IT Academy Sprint 2.2 Frontend Shop
 
+## Install and run
 
 1. Clone this repo
 ```bash
@@ -32,13 +34,25 @@ $ npm run dev
 
 <br>
 
-## Introduction
-
-
-<br>
-
-
 ## Project structure
+
+The project is structured as follows:
+
+<pre>
+  -/css/                      All the bootstrap css code
+  -/data/                     The mocked products data file used to manage the cart
+  -/etc/                      screenshot for the README file
+  -/images/                   product image files used in articles at index.html
+  -/js/            
+    -/CartListManager/        Cart list manager that allows to manage the cart items for the user.
+      - /providers/           Providers of the cart list manager to get and set data
+    -/CartManager/            Cart manager with functionality to add, remove or print the cart
+    -/CheckoutFormValidator/  Form validation code
+    - checkout.js             UI management fot the checkout form interaction
+    - modal.js                functionality to open the modal cart  capturing the bootstrap click event
+    - shop.js                 UI management for the shop interaction (add products to the cart list)
+</pre>
+
 
 ## Considerations
 
