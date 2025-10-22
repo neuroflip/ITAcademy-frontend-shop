@@ -49,8 +49,11 @@ The project is structured as follows:
 ## Considerations
 
 - ***Object oriented*** code (CartListManager, CartManager and CheckoutFormValidator)
-- the cart is managed using the ***js/CartManager/CartManager.js*** offering the main logic to add, remove or print the cart. It uses ***CartManager/cartUtilities.js*** that implements some functions as utilities for the CartManager. It manages the dom manipulation operations mainly.
-- the cart list is managed by ***CartListManager/CartListManager.js***. It uses a data provider to manage the cart list items. The providers are implemented at ***CartListManager/providers/*** There are 2 implemented CartList data providers: ***CartListManager/providers/CartListMemoryProvider.js*** (that stores the cart data using an array in memory so it does not do persistance) and ***CartListManager/providers/CartListLocalStorageProvider.js*** (that stores the cart list in localstorage providing persistance between page loads and different pages). The dependency injection is done at CartManager constructor. This dependency injection decouples dependencies between the CartListManager and the data provider resulting in a more modular and clean code. This provides reusability, easy testing and maintenability.
+- the cart is managed using the ***js/CartManager/CartManager.js*** offering the main logic to add, remove or print the cart. It uses ***CartManager/cartUtilities.js*** that implements some functions as utilities for the CartManager.
+- the cart list data persistency is managed by ***CartListManager/CartListManager.js***. It uses a data provider to get and set the cart list. The providers are implemented at ***CartListManager/providers/*** There are 2 implemented CartList data providers:
+  - ***CartListManager/providers/CartListMemoryProvider.js***: stores the cart data using an array in memory so it does not do persistance between loads
+  - ***CartListManager/providers/CartListLocalStorageProvider.js***: stores the cart list in localstorage providing persistance between page loads and different pages.
+- The CartListManager dependency injection for the provider is done at CartManager constructor. This dependency injection decouples dependencies between the CartListManager and the data provider resulting in a more modular and clean code. This provides reusability, easy testing and maintenability.
 - The ***CheckoutFormValidator/CheckoutFormValidator.js*** implements the Form validation using the individual validators in validators.js
 - This way shop.js, modal.js and shop.js are just preparing the ui interaction and not managing the main logic of the site providing a clean arquitecture.
 - some use cases explained:
