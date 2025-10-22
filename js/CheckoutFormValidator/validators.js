@@ -1,3 +1,6 @@
+const INVALIDCLASS = 'is-invalid';
+const VALIDCLASS = 'is-valid';
+
 const lettersPattern = /^[a-zA-Z\ .]+$/;
 const lettersAndNumbersPattern = /^[a-zA-Z0-9\s]+$/;
 const numbersPattern = /\d+/;
@@ -19,73 +22,134 @@ const isValidPasswordLength = (value) => checkMinLength(value, 4);
 const isValidPasswordContent = (value) => Boolean(checkLettersAndNumbers(value));
 const isValidAdressLength = (value) => checkMinLength(value, 3);
 
-const validateNameAndShowError = (value, errorElement, lengthErrorMessage, lettersErrorMessage) => {
-  	let validates = true;
+const updateBootstrapValidClasses = (input, isValid) => {
+	if (!isValid) {
+		input.classList.add(INVALIDCLASS);
+		input.classList.remove(VALIDCLASS);
+	} else {
+		input.classList.remove(INVALIDCLASS);
+		input.classList.add(VALIDCLASS);
+	}
+}
 
-  	if (!isValidNameLength(value)) {
+const validateNameAndShowError = () => {
+	const input = document.getElementById("fName");
+	const errorElement = document.getElementById("errorName");
+	const lengthErrorMessage = "The name must have at least 3 characters";
+	const lettersErrorMessage = "The name must contain only letters, spaces or dots";
+	let isValid = true;
+
+	if (!isValidNameLength(input.value)) {
 			errorElement.textContent = lengthErrorMessage;
-    	validates = false;
-	} else if (!isValidNameContent(value)) {
+    	isValid = false;
+	} else if (!isValidNameContent(input.value)) {
 			errorElement.textContent = lettersErrorMessage;
-    	validates = false;
+    	isValid = false;
 	}
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-const validateEmailAndShowError = (value, errorElement, lengthErrorMessage, formatErrorMessage) => {
-	let validates = true;
+const validateLastNameAndShowError = () => {
+	const input = document.getElementById("fLastN");
+	const errorElement = document.getElementById("errorLastN");
+	const lengthErrorMessage = "The last name must have at least 3 characters";
+	const lettersErrorMessage = "The last name must contain only letters, spaces or dots";
+	let isValid = true;
 
-  	if (!isValidEmailLength(value)) {
+	if (!isValidNameLength(input.value)) {
 		errorElement.textContent = lengthErrorMessage;
-		validates = false;
-	} else if (!isValidEmailFormat(value)) {
+		isValid = false;
+	} else if (!isValidNameContent(input.value)) {
+		errorElement.textContent = lettersErrorMessage;
+		isValid = false;
+	}
+
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
+}
+
+const validateEmailAndShowError = () => {
+	const input = document.getElementById("fEmail");
+	const errorElement = document.getElementById("errorEmail");
+	const lengthErrorMessage = "The email must have at least 3 characters";
+	const formatErrorMessage = "The email is not a correct email";
+
+	let isValid = true;
+
+	if (!isValidEmailLength(input.value)) {
+		errorElement.textContent = lengthErrorMessage;
+		isValid = false;
+	} else if (!isValidEmailFormat(input.value)) {
 		errorElement.textContent = formatErrorMessage;
-		validates = false;
+		isValid = false;
 	}
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-const validatePhoneAndShowError = (value, errorElement, lengthErrorMessage, numbersErrorMessage) => {
-	let validates = true;
+const validatePhoneAndShowError = () => {
+	const input = document.getElementById("fPhone");
+	const errorElement = document.getElementById("errorPhone");
+	const lengthErrorMessage = "The phone number must be 9 digits with no letters";
+	const formatErrorMessage = "The phone must contain only numbers";
+	let isValid = true;
 
-  	if (!isValidPhoneLength(value)  ) {
+	if (!isValidPhoneLength(input.value)  ) {
 		errorElement.textContent = lengthErrorMessage;
-		validates = false;
-	} else if (!isValidPhoneContent(value)) {
-		errorElement.textContent = numbersErrorMessage;
-		validates = false;
+		isValid = false;
+	} else if (!isValidPhoneContent(input.value)) {
+		errorElement.textContent = formatErrorMessage;
+		isValid = false;
 	}
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-const validatePasswordAndShowError = (value, errorElement, lengthErrorMessage, lettersNumbersErrorMessage) => {
-	let validates = true;
+const validatePasswordAndShowError = () => {
+	const input = document.getElementById("fPassword");
+	const errorElement = document.getElementById("errorPassword");
+	const lengthErrorMessage = "The password must have at least 4 characters";
+	const formatErrorMessage = "The password must contain only numbers or letters";
+	let isValid = true;
 
-  if (!isValidPasswordLength(value)) {
+  if (!isValidPasswordLength(input.value)) {
 		errorElement.textContent = lengthErrorMessage;
-		validates = false;
-	} else if (!isValidPasswordContent(value)) {
-		errorElement.textContent = lettersNumbersErrorMessage;
-		validates = false;
+		isValid = false;
+	} else if (!isValidPasswordContent(input.value)) {
+		errorElement.textContent = formatErrorMessage;
+		isValid = false;
 	}
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-const validateAdressAndShowError = (value, errorElement, lengthErrorMessage) => {
-  let validates = true;
+const validateAdressAndShowError = () => {
+	const input = document.getElementById("fAddress");
+	const errorElement = document.getElementById("errorAddress");
+	const lengthErrorMessage = "The address must have at least 3 characters";
+  let isValid = true;
 
-  if (!isValidAdressLength(value)) {
+  if (!isValidAdressLength(input.value)) {
     errorElement.textContent = lengthErrorMessage;
-    validates = false;
+    isValid = false;
   }
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-export { validateNameAndShowError, validateEmailAndShowError, validatePhoneAndShowError, validatePasswordAndShowError, validateAdressAndShowError,
-	isValidNameLength, isValidNameContent, isValidEmailLength, isValidEmailFormat, isValidPhoneLength, isValidPhoneContent,
-	isValidPasswordLength, isValidPasswordContent, isValidAdressLength };
+export { validateNameAndShowError, validateLastNameAndShowError, validateEmailAndShowError, validatePhoneAndShowError,
+	validatePasswordAndShowError, validateAdressAndShowError, isValidNameLength, isValidNameContent, isValidEmailLength,
+	isValidEmailFormat, isValidPhoneLength, isValidPhoneContent, isValidPasswordLength, isValidPasswordContent, 
+	isValidAdressLength };
