@@ -1,10 +1,17 @@
-const MODAL_ID = 'cartModal';
+import CartManager from './CartManager/CartManager.js';
 
-const prepareModalToOpen = (callback) => {
+const MODAL_ID = 'cartModal';
+const cart = new CartManager();
+
+const open_modal = () =>  {
+    cart.printCart();
+}
+
+const prepareModalToOpen = () => {
   const modalFragmentElement = document.getElementById(MODAL_ID);
 
   modalFragmentElement.addEventListener('show.bs.modal', function () {
-    callback();
+    open_modal();
   });
 };
 

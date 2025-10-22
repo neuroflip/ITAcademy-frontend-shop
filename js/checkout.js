@@ -1,7 +1,7 @@
+import { prepareModalToOpen } from './modal.js';
 import CheckoutFormValidator from "./CheckoutFormValidator/CheckoutFormValidator.js";
-import { validateNameAndShowError, validateEmailAndShowError, validatePhoneAndShowError, validatePasswordAndShowError,
-  validateAdressAndShowError } from './CheckoutFormValidator/validators.js';
-
+import { validateNameAndShowError, validateLastNameAndShowError, validateEmailAndShowError, validatePhoneAndShowError, 
+	validatePasswordAndShowError, validateAdressAndShowError } from './CheckoutFormValidator/validators.js';
 
 const formValidator = new CheckoutFormValidator();
 
@@ -11,10 +11,11 @@ const formSubmitEventHandler = () => {
 	submitButton.addEventListener('click', (event) => {
 		event.preventDefault();
 
-		if (!formValidator.validateAndUpdateUI()) {
+		if (!formValidator.validateAllAndUpdateUI()) {
 			submitButton.setAttribute('disabled', '');
 		} else {
 			submitButton.removeAttribute('disabled');
+			window.alert("Submited!");
 		}
 	})
 }
@@ -43,7 +44,7 @@ const formButtonDisabledStateManagement = () => {
 	const fEmail = document.getElementById("fEmail");
 
 	addKeyupEventListenerToFormButton(fName, validateNameAndShowError);
-	addKeyupEventListenerToFormButton(fLastN, validateNameAndShowError);
+	addKeyupEventListenerToFormButton(fLastN, validateLastNameAndShowError);
 	addKeyupEventListenerToFormButton(fAddress, validateAdressAndShowError);
 	addKeyupEventListenerToFormButton(fPassword, validatePasswordAndShowError);
 	addKeyupEventListenerToFormButton(fPhone, validatePhoneAndShowError);
@@ -52,3 +53,4 @@ const formButtonDisabledStateManagement = () => {
 
 formSubmitEventHandler();
 formButtonDisabledStateManagement();
+prepareModalToOpen();

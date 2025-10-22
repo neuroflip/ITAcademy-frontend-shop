@@ -18,7 +18,7 @@ class CheckoutFormValidator {
       isValidPasswordContent(fPassword) && isValidAdressLength(fAddress);
   }
 
-  validateAndUpdateUI() {
+  validateAllAndUpdateUI() {
     let error = 0;
     const formElement = document.querySelector(".form");
 
