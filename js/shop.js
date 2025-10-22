@@ -24,4 +24,4 @@ const prepareCleanCartInteraction = () => {
 
 prepareProductAddToCartInteraction();
 prepareCleanCartInteraction();
-prepareModalToOpen();
+prepareModalToOpen(() => cart.printCart());

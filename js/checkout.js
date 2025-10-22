@@ -1,9 +1,11 @@
 import { prepareModalToOpen } from './modal.js';
+import CartManager from './CartManager/CartManager.js';
 import CheckoutFormValidator from "./CheckoutFormValidator/CheckoutFormValidator.js";
 import { validateNameAndShowError, validateLastNameAndShowError, validateEmailAndShowError, validatePhoneAndShowError, 
 	validatePasswordAndShowError, validateAdressAndShowError } from './CheckoutFormValidator/validators.js';
 
 const formValidator = new CheckoutFormValidator();
+const cart = new CartManager();
 
 const formSubmitEventHandler = () => {
 	const submitButton = document.getElementById('btn');
@@ -53,4 +55,4 @@ const formButtonDisabledStateManagement = () => {
 
 formSubmitEventHandler();
 formButtonDisabledStateManagement();
-prepareModalToOpen();
+prepareModalToOpen(() => cart.printCart());
