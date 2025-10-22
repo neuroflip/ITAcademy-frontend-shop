@@ -1,3 +1,6 @@
+const INVALIDCLASS = 'is-invalid';
+const VALIDCLASS = 'is-valid';
+
 const lettersPattern = /^[a-zA-Z\ .]+$/;
 const lettersAndNumbersPattern = /^[a-zA-Z0-9\s]+$/;
 const numbersPattern = /\d+/;
@@ -5,75 +8,148 @@ const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const checkOnlyLettersSpaceAndDot = (name) => name.match(lettersPattern);
 const checkLettersAndNumbers = (value) => value.match(lettersAndNumbersPattern);
-const checkOnlyNumbers = (number) => number.match(numbersPattern); 
+const checkOnlyNumbers = (number) => number.match(numbersPattern);
 const checkEmail = (email) => email.match(emailPattern);
 const checkMinLength = (value, length) => value.length >= length;
 
-const validateName = (value, errorElement, lengthErrorMessage, lettersErrorMessage) => {	
-  let validates = true;
+const isValidNameLength = (value) => checkMinLength(value, 3);
+const isValidNameContent = (value) => Boolean(checkOnlyLettersSpaceAndDot(value));
+const isValidEmailLength = (value) => checkMinLength(value, 3);
+const isValidEmailFormat = (value) => Boolean(checkEmail(value));
+const isValidPhoneLength = (value) => value.length === 9;
+const isValidPhoneContent = (value) => Boolean(checkOnlyNumbers(value));
+const isValidPasswordLength = (value) => checkMinLength(value, 4);
+const isValidPasswordContent = (value) => Boolean(checkLettersAndNumbers(value));
+const isValidAdressLength = (value) => checkMinLength(value, 3);
 
-  if (!checkMinLength(value, 3)) {
+const updateBootstrapValidClasses = (input, isValid) => {
+	if (!isValid) {
+		input.classList.add(INVALIDCLASS);
+		input.classList.remove(VALIDCLASS);
+	} else {
+		input.classList.remove(INVALIDCLASS);
+		input.classList.add(VALIDCLASS);
+	}
+}
+
+const validateNameAndShowError = () => {
+	const input = document.getElementById("fName");
+	const errorElement = document.getElementById("errorName");
+	const lengthErrorMessage = "The name must have at least 3 characters";
+	const lettersErrorMessage = "The name must contain only letters, spaces or dots";
+	let isValid = true;
+
+	if (!isValidNameLength(input.value)) {
+			errorElement.textContent = lengthErrorMessage;
+    	isValid = false;
+	} else if (!isValidNameContent(input.value)) {
+			errorElement.textContent = lettersErrorMessage;
+    	isValid = false;
+	}
+
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
+}
+
+const validateLastNameAndShowError = () => {
+	const input = document.getElementById("fLastN");
+	const errorElement = document.getElementById("errorLastN");
+	const lengthErrorMessage = "The last name must have at least 3 characters";
+	const lettersErrorMessage = "The last name must contain only letters, spaces or dots";
+	let isValid = true;
+
+	if (!isValidNameLength(input.value)) {
 		errorElement.textContent = lengthErrorMessage;
-    validates = false;
-	} else if (!checkOnlyLettersSpaceAndDot(value)) {
+		isValid = false;
+	} else if (!isValidNameContent(input.value)) {
 		errorElement.textContent = lettersErrorMessage;
-    validates = false;
+		isValid = false;
 	}
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-const validateEmail = (value, errorElement, lengthErrorMessage, formatErrorMessage) => {
-	let validates = true;
+const validateEmailAndShowError = () => {
+	const input = document.getElementById("fEmail");
+	const errorElement = document.getElementById("errorEmail");
+	const lengthErrorMessage = "The email must have at least 3 characters";
+	const formatErrorMessage = "The email is not a correct email";
 
-  if (!checkMinLength(value, 3)) {
+	let isValid = true;
+
+	if (!isValidEmailLength(input.value)) {
 		errorElement.textContent = lengthErrorMessage;
-		validates = false;
-	} else if (!checkEmail(value)) {
+		isValid = false;
+	} else if (!isValidEmailFormat(input.value)) {
 		errorElement.textContent = formatErrorMessage;
-		validates = false;
+		isValid = false;
 	}
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-const validatePhone = (value, errorElement, lengthErrorMessage, numbersErrorMessage) => {
-	let validates = true;
+const validatePhoneAndShowError = () => {
+	const input = document.getElementById("fPhone");
+	const errorElement = document.getElementById("errorPhone");
+	const lengthErrorMessage = "The phone number must be 9 digits with no letters";
+	const formatErrorMessage = "The phone must contain only numbers";
+	let isValid = true;
 
-  if (value.length !== 9) {
+	if (!isValidPhoneLength(input.value)  ) {
 		errorElement.textContent = lengthErrorMessage;
-		validates = false;
-	} else if (!checkOnlyNumbers(value)) {
-		errorElement.textContent = numbersErrorMessage;
-		validates = false;
+		isValid = false;
+	} else if (!isValidPhoneContent(input.value)) {
+		errorElement.textContent = formatErrorMessage;
+		isValid = false;
 	}
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-const validatePassword = (value, errorElement, lengthErrorMessage, lettersNumbersErrorMessage) => {
-	let validates = true;
+const validatePasswordAndShowError = () => {
+	const input = document.getElementById("fPassword");
+	const errorElement = document.getElementById("errorPassword");
+	const lengthErrorMessage = "The password must have at least 4 characters";
+	const formatErrorMessage = "The password must contain only numbers or letters";
+	let isValid = true;
 
-  if (!checkMinLength(value, 4)) {
+  if (!isValidPasswordLength(input.value)) {
 		errorElement.textContent = lengthErrorMessage;
-		validates = false;
-	} else if (!checkLettersAndNumbers(value)) {
-		errorElement.textContent = lettersNumbersErrorMessage;
-		validates = false;
+		isValid = false;
+	} else if (!isValidPasswordContent(input.value)) {
+		errorElement.textContent = formatErrorMessage;
+		isValid = false;
 	}
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-const validateMinLength = (value, errorElement, lengthErrorMessage) => {
-  let validates = true;
+const validateAdressAndShowError = () => {
+	const input = document.getElementById("fAddress");
+	const errorElement = document.getElementById("errorAddress");
+	const lengthErrorMessage = "The address must have at least 3 characters";
+  let isValid = true;
 
-  if (value.length < length) {
+  if (!isValidAdressLength(input.value)) {
     errorElement.textContent = lengthErrorMessage;
-    validates = false;
+    isValid = false;
   }
 
-  return validates;
+	updateBootstrapValidClasses(input, isValid);
+
+  return isValid;
 }
 
-export { validateName, validateEmail, validatePhone, validatePassword, validateMinLength }
+export { validateNameAndShowError, validateLastNameAndShowError, validateEmailAndShowError, validatePhoneAndShowError,
+	validatePasswordAndShowError, validateAdressAndShowError, isValidNameLength, isValidNameContent, isValidEmailLength,
+	isValidEmailFormat, isValidPhoneLength, isValidPhoneContent, isValidPasswordLength, isValidPasswordContent, 
+	isValidAdressLength };

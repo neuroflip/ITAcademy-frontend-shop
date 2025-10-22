@@ -1,6 +1,5 @@
 import { prepareModalToOpen } from './modal.js';
 import CartManager from './CartManager/CartManager.js';
-import CartListLocalStorage from './CartListManager/providers/CartListProviderLocalStorage.js';
 
 const cart = new CartManager();
 
@@ -23,10 +22,6 @@ const prepareCleanCartInteraction = () => {
     });
 }
 
-const open_modal = () =>  {
-    cart.printCart();
-}
-
 prepareProductAddToCartInteraction();
 prepareCleanCartInteraction();
-prepareModalToOpen(open_modal);
+prepareModalToOpen(() => cart.printCart());
