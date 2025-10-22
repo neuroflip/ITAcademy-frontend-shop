@@ -10,27 +10,19 @@ This repo contains the solution for the IT Academy Sprint 2.2 Frontend Shop
 
 ## Install and run
 
-1. Clone this repo
+1. Clone this repo:
 ```bash
 $ git clone https://github.com/neuroflip/ITAcademy-frontend-shop.git
 ```
-2. Install the dependencies
+2. Install the dependencies:
 ```bash
 $ npm install
 ```
-3. Build the project
+3. Run the web server (instruction for mac osx):
 ```bash
-$ npm run build
+$ python3 -m http.server 9000
 ```
-4. Run the project in production mode:
-```bash
-$ npm run preview
-```
-
-Or run the project in developement mode:
-```bash
-$ npm run dev
-```
+4. Load the page http:localhost:9000 at the browser
 
 <br>
 
