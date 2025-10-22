@@ -2,11 +2,11 @@
 
 ## Introduction
 
+This repo contains the solution for the IT Academy Sprint 2.2 Frontend Shop:
+
 ![alt basic screenshot from the project](https://github.com/neuroflip/ITAcademy-frontend-shop/blob/main/etc/screenshot.png)
 
 <br>
-
-This repo contains the solution for the IT Academy Sprint 2.2 Frontend Shop
 
 ## Install and run
 
@@ -36,20 +36,21 @@ The project is structured as follows:
   -/etc/                      screenshot for the README file
   -/images/                   product image files used in articles at index.html
   -/js/            
-    -/CartListManager/        Cart list manager that allows to manage the cart items for the user.
-      - /providers/           Providers of the cart list manager to get and set data
-    -/CartManager/            Cart manager with functionality to add, remove or print the cart
+    -/CartListManager/        Cart list data manager with persistence between page loads.
+      - /providers/           Providers of the cart list manager to get and set the cart data. 
+    -/CartManager/            Cart manager with functionality to add items, remove items, clean the cart or print it.
     -/CheckoutFormValidator/  Form validation code
     - checkout.js             UI management fot the checkout form interaction
     - modal.js                functionality to open the modal cart capturing the bootstrap click event
     - shop.js                 UI management for the shop interaction (add products to the cart list)
 </pre>
 
+<br>
 
 ## Considerations
 
 - ***Object oriented*** code (CartListManager, CartManager and CheckoutFormValidator)
-- the cart is managed using the ***js/CartManager/CartManager.js*** offering the main logic to add, remove or print the cart. It uses ***CartManager/cartUtilities.js*** that implements some functions as utilities for the CartManager.
+- the cart is managed using the ***js/CartManager/CartManager.js*** offering the main logic to add items, remove items, clean the cart or print it. It uses ***CartManager/cartUtilities.js*** that implements some functions as utilities for the CartManager.
 - the cart list data persistency is managed by ***CartListManager/CartListManager.js***. It uses a data provider to get and set the cart list. The providers are implemented at ***CartListManager/providers/*** There are 2 implemented CartList data providers:
   - ***CartListManager/providers/CartListMemoryProvider.js***: stores the cart data using an array in memory so it does not do persistance between loads
   - ***CartListManager/providers/CartListLocalStorageProvider.js***: stores the cart list in localstorage providing persistance between page loads and different pages.
