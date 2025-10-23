@@ -81,3 +81,16 @@ Only tested the CartListManager and dependencies:
  - CartListManager itself
  - and providers: CartListProviderMemory and CartListProviderLocalStorage
 
+## Issues from p2p review
+
+After the p2p review I decided to apply some useful UX changes requested in the review:
+
+ - applied call to action changes:
+    - the checkout form is the first element on page. This removes the need for scroll to access the form
+    - at the modal cart list:
+      - the + and - buttons for quantities are now near the product quantity
+      - there is a new offer badge when an offer is applied
+
+![alt basic screenshot from the mopdal cartlist](https://github.com/neuroflip/ITAcademy-frontend-shop/blob/main/etc/cartList.png)
+
+Thanks to the reviewer Ana! This were great tips on UX!!!
