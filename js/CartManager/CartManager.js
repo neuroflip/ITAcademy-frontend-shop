@@ -1,8 +1,8 @@
 import products from "../../data/products.js";
 import CartListManager from "../CartListManager/CartListManager.js";
 import CartListLocalStorage from "../CartListManager/providers/CartListProviderLocalStorage.js";
-import { createCartTableElementsForProduct, appendCartChildElements, roundTwoDecimals, getDiscountPrice,
-  createPriceWithDiscountBadgeIfNeeded, calculateTotal, showEmptyCart, showFullCart } from "./cartUtilities.js";
+import { createCartTableElementsForProduct, appendCartChildElements, getDiscountPrice,
+  createPriceWithDiscountBadgeIfNeeded, calculateTotal, showEmptyCart, showFullCart, printTotalPrice } from "./cartUtilities.js";
 
 class CartManager {
     constructor() {
@@ -40,19 +40,14 @@ class CartManager {
         if (this.cartList.length === 0) {
           showEmptyCart();
         } else {
-          const tbodyElement = document.getElementById('cart-list');
-          const totalElement = document.getElementById('total_price');
-
-          showFullCart();
           this.#applyPromotionsCart();
-          tbodyElement.innerHTML = '';
+          const tbodyElement = showFullCart(this.cartList);
 
           this.cartList.forEach((product) => {
               this.#printProduct(product, tbodyElement);
           });
-
-          const total = roundTwoDecimals(calculateTotal(this.cartList));
-          totalElement.textContent = total;
+          
+          printTotalPrice(calculateTotal(this.cartList));
         }
     }
 
