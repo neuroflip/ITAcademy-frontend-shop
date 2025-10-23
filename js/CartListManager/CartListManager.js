@@ -1,4 +1,4 @@
-class CartListProvider {
+class CartListManager {
   constructor(provider) {
     this.provider = provider;
   }
@@ -8,8 +8,8 @@ class CartListProvider {
   }
 
   setCartList(cartList) {
-    this.provider.setCardList(cartList);
+    this.provider.setCartList(cartList);
   }
 }
 
-export default CartListProvider;
+export default CartListManager;

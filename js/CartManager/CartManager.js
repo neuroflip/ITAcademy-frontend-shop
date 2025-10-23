@@ -1,14 +1,14 @@
 import products from "../../data/products.js";
 import { getDiscountPrice } from "./cartUtilities.js";
 import CartListManager from "../CartListManager/CartListManager.js";
-import CartListProvider from "../CartListManager/providers/CartListProviderLocalStorage.js";
+import CartListLocalStorage from "../CartListManager/providers/CartListProviderLocalStorage.js";
 import { createCartTableElements, createOperationColumnWithButtons, appendCartChildElements, roundTwoDecimals,
   calculateTotal, showEmptyCart, showFullCart } from "./cartUtilities.js";
 
 class CartManager {
     constructor() {
-        this.CartListManager = new CartListManager(new CartListProvider());
-        this.cartList = this.CartListManager.getCartList();
+        this.cartListManager = new CartListManager(new CartListLocalStorage());
+        this.cartList = this.cartListManager.getCartList();
         this.#updateItemsCounter();
     }
 
@@ -26,7 +26,7 @@ class CartManager {
             this.cartList.push(productToAdd);
         }
 
-        this.CartListManager.setCartList(this.cartList);
+        this.cartListManager.setCartList(this.cartList);
         this.#updateItemsCounter();
     }
 
@@ -60,7 +60,7 @@ class CartManager {
     cleanCart() {
         this.cartList = [];
         this.printCart();
-        this.CartListManager.setCartList(this.cartList);
+        this.cartListManager.setCartList(this.cartList);
         this.#updateItemsCounter();
     }
 
@@ -80,7 +80,7 @@ class CartManager {
             this.#applyPromotionsCart();
         }
 
-        this.CartListManager.setCartList(this.cartList);
+        this.cartListManager.setCartList(this.cartList);
         this.#updateItemsCounter();
     }
 
