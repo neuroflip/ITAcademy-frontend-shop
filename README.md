@@ -19,15 +19,21 @@ $ git clone https://github.com/neuroflip/ITAcademy-frontend-shop.git
 ```bash
 $ npm install
 ```
-3. Run the web server:
-***NOTE: you will need to install and run a web server to be able to load the web page correctly. This is because the site is accessing to local storage as a persistance system and loading directly index.html into the browser you will get a CORS policy error and it will not load.***
- - instruction for mac osx:
+3. Run in dev mode:
 ```bash
-$ python3 -m http.server 9000
+$ npm install
 ```
- - instructions for Windows: look for a web server and install it. It can be https://simplewebserver.org/ or you can use IIS (the standard window web server) https://www.microsoft.com/es-es/download/details.aspx?id=48264
 
-4. Load the page using localhost and the port configured at the web server.
+4. Or run it on production mode:
+```bash
+$ npm run build
+$ npm run preview
+```
+
+5. Run the tests:
+```bash
+$ npm run test
+```
 
 <br>
 
@@ -57,8 +63,8 @@ The project is structured as follows:
 - ***Object oriented*** code (CartListManager, CartManager and CheckoutFormValidator)
 - the cart is managed using the ***js/CartManager/CartManager.js*** offering the main logic to add items, remove items, clean the cart or print it. It uses ***CartManager/cartUtilities.js*** that implements some functions as utilities for the CartManager.
 - the cart list data persistency is managed by ***CartListManager/CartListManager.js***. It uses a data provider to get and set the cart list. The providers are implemented at ***CartListManager/providers/*** There are 2 implemented CartList data providers:
-  - ***CartListManager/providers/CartListMemoryProvider.js***: stores the cart data using an array in memory so it does not do persistance between loads
-  - ***CartListManager/providers/CartListLocalStorageProvider.js***: stores the cart list in localstorage providing persistance between page loads and different pages.
+  - ***CartListManager/providers/CartListProviderMemory.js***: stores the cart data using an array in memory so it does not do persistance between loads
+  - ***CartListManager/providers/CartListProviderLocalStorage.js***: stores the cart list in localstorage providing persistance between page loads and different pages.
 - The CartListManager dependency injection for the provider is done at CartManager constructor. This dependency injection decouples dependencies between the CartListManager and the data provider resulting in a more modular and clean code. This provides reusability, easy testing and maintenability.
 - The ***CheckoutFormValidator/CheckoutFormValidator.js*** implements the Form validation using the individual validators in validators.js
 - This way shop.js, modal.js and shop.js are just preparing the ui interaction and not managing the main logic of the site providing a clean arquitecture.
@@ -75,8 +81,3 @@ Only tested the CartListManager and dependencies:
  - CartListManager itself
  - and providers: CartListProviderMemory and CartListProviderLocalStorage
 
-To run the tests execute:
-
-```bash
-$ npm run test
-```
