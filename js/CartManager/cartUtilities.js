@@ -1,13 +1,26 @@
+import discountImgUrl from '../../images/discount.png';
 
 const getDiscountPrice = (price, discount) => price - (price * discount);
-const createCartTableElements = () => {
+const createCartTableElementsForProduct = (product) => {
     const tr = document.createElement('tr');
     const th = document.createElement('th');
     const tdPrice = document.createElement('td');
     const tdQuantity = document.createElement('td');
     const tdSubtotalPrice = document.createElement('td');
     const tdOperation = document.createElement('td');
-
+    const addCallback  = () => { this.addToCard(product.id); this.printCart() };
+    const removeCallback = () => { this.removeFromCart(product.id); this.printCart() };
+    const addButton = createOperationButton('+', addCallback);
+    const removeButton = createOperationButton('-', removeCallback);
+    
+    th.textContent = product.name;
+    tdPrice.textContent = `$${product.price}`;
+    tdQuantity.textContent = product.quantity + ' ';
+    tdQuantity.classList.add('p-0');
+    th.setAttribute('scope', 'row');
+    tdQuantity.appendChild(addButton);
+    tdQuantity.appendChild(removeButton);
+    
     return [tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation];
 }
 
@@ -20,6 +33,17 @@ const createOperationButton = (text, callback) => {
     button.className = `btn btn-outline-dark p-1 ${text === '-' ? 'm-1' : 'm-0'} rounded-3`;
 
     return button;
+}
+
+const createPriceWithDiscountBadgeIfNeeded = (isDiscountApplied, subtotalWithDiscount, subtotal, td) => {
+    td.textContent = `$${roundTwoDecimals(isDiscountApplied ? subtotalWithDiscount: subtotal)}`;
+
+    if (isDiscountApplied) {
+        const discountImg = document.createElement('img');
+
+        discountImg.src = discountImgUrl;
+        td.appendChild(discountImg);
+    } 
 }
 
 const appendCartChildElements = (tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation) => {
@@ -57,5 +81,5 @@ const showEmptyCart = () => {
     modalEmptyH1.classList.remove('d-none');
 }
 
-export { getDiscountPrice, createCartTableElements, createOperationButton, 
+export { getDiscountPrice, createCartTableElementsForProduct, createOperationButton, createPriceWithDiscountBadgeIfNeeded,
   appendCartChildElements, roundTwoDecimals, calculateTotal, showEmptyCart, showFullCart };
