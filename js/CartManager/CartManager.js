@@ -9,6 +9,7 @@ class CartManager {
     constructor() {
         this.CartListManager = new CartListManager(new CartListProvider());
         this.cartList = this.CartListManager.getCartList();
+        this.#updateItemsCounter();
     }
 
     addToCard(id) {
@@ -26,6 +27,14 @@ class CartManager {
         }
 
         this.CartListManager.setCartList(this.cartList);
+        this.#updateItemsCounter();
+    }
+
+    #updateItemsCounter() {
+        const counterElement = document.getElementById('count_product');
+        const totalValue = this.cartList.reduce((total, item) => { return total + item.quantity}, 0);
+
+        counterElement.textContent = totalValue;
     }
 
     printCart() {
@@ -52,6 +61,7 @@ class CartManager {
         this.cartList = [];
         this.printCart();
         this.CartListManager.setCartList(this.cartList);
+        this.#updateItemsCounter();
     }
 
     removeFromCart(id) {
@@ -71,6 +81,7 @@ class CartManager {
         }
 
         this.CartListManager.setCartList(this.cartList);
+        this.#updateItemsCounter();
     }
 
     #printProduct(product, tbodyElement) {
