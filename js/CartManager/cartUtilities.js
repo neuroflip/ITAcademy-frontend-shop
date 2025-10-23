@@ -1,15 +1,14 @@
 import discountImgUrl from '../../images/discount.png';
 
-const getDiscountPrice = (price, discount) => price - (price * discount);
-const createCartTableElementsForProduct = (product) => {
+function createCartTableElementsForProduct(product) {
+    const addCallback  = () => { this.addToCard(product.id); this.printCart() };
+    const removeCallback = () => { this.removeFromCart(product.id); this.printCart() };
     const tr = document.createElement('tr');
     const th = document.createElement('th');
     const tdPrice = document.createElement('td');
     const tdQuantity = document.createElement('td');
     const tdSubtotalPrice = document.createElement('td');
     const tdOperation = document.createElement('td');
-    const addCallback  = () => { this.addToCard(product.id); this.printCart() };
-    const removeCallback = () => { this.removeFromCart(product.id); this.printCart() };
     const addButton = createOperationButton('+', addCallback);
     const removeButton = createOperationButton('-', removeCallback);
     
@@ -24,6 +23,7 @@ const createCartTableElementsForProduct = (product) => {
     return [tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation];
 }
 
+const getDiscountPrice = (price, discount) => price - (price * discount);
 const createOperationButton = (text, callback) => {
     const button = document.createElement('button');
 
@@ -35,8 +35,8 @@ const createOperationButton = (text, callback) => {
     return button;
 }
 
-const createPriceWithDiscountBadgeIfNeeded = (isDiscountApplied, subtotalWithDiscount, subtotal, td) => {
-    td.textContent = `$${roundTwoDecimals(isDiscountApplied ? subtotalWithDiscount: subtotal)}`;
+const createPriceWithDiscountBadgeIfNeeded = (isDiscountApplied, subtotalWithDiscount, td) => {
+    td.textContent = `$${String(roundTwoDecimals(subtotalWithDiscount))}`;
 
     if (isDiscountApplied) {
         const discountImg = document.createElement('img');

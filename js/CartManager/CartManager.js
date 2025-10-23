@@ -84,10 +84,10 @@ class CartManager {
     }
 
     #printProduct(product, tbodyElement) {
-        const [tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation] = createCartTableElementsForProduct(product);
-        const isDiscountApplied = product.subtotalWithDiscount > 0;
+        const [tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation] = createCartTableElementsForProduct.call(this, product);
+        const isDiscountApplied = product.quantity >= product.offer?.number ;
 
-        createPriceWithDiscountBadgeIfNeeded(isDiscountApplied, product.subtotalWithDiscount, product.subtotal, tdSubtotalPrice);
+        createPriceWithDiscountBadgeIfNeeded(isDiscountApplied, product.subtotalWithDiscount, tdSubtotalPrice);
         appendCartChildElements(tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation);
         tbodyElement.appendChild(tr);
     }
@@ -100,11 +100,8 @@ class CartManager {
                 } else {
                     product.subtotalWithDiscount = product.price * product.quantity;
                 }
-
-                product.subtotal = product.price * product.quantity;
             } else {
-                product.subtotalWithDiscount = 0;
-                product.subtotal = product.price * product.quantity;
+                product.subtotalWithDiscount = product.price * product.quantity;
             }
         });
     }
