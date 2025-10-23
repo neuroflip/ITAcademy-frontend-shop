@@ -36,7 +36,7 @@ const createOperationButton = (text, callback) => {
 }
 
 const createPriceWithDiscountBadgeIfNeeded = (isDiscountApplied, subtotalWithDiscount, td) => {
-    td.textContent = `$${String(roundTwoDecimals(subtotalWithDiscount))}`;
+    td.textContent = `$${roundTwoDecimals(subtotalWithDiscount)}`;
 
     if (isDiscountApplied) {
         const discountImg = document.createElement('img');
