@@ -2,8 +2,10 @@
   "name": "itacademy-frontend-shop",
   "version": "1.0.0",
   "description": "ITAcademy Sprint2 - frontend shop ",
-  "main": "index.js",
   "scripts": {
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev": "vite",
     "test": "vitest"
   },
   "repository": {
