@@ -57,16 +57,27 @@ const roundTwoDecimals = (num) => Math.round(num * 100) / 100;
 const calculateTotal = (cartList) => cartList.reduce((total, product) => total + product.subtotalWithDiscount, 0);
 
 
-const showFullCart = () => {
+const showFullCart = (cartList) => {
     const modalTable = document.getElementById('modal-cart-table');
     const modalTotal = document.getElementById('modal-cart-total');
     const modalButtons = document.getElementById('modal-cart-buttons');
     const modalEmptyH1 = document.getElementById('modal-cart-empty');
+    const tbodyElement = document.getElementById('cart-list');
 
     modalTable.classList.remove('d-none');
     modalTotal.classList.remove('d-none');
     modalButtons.classList.remove('d-none');
     modalEmptyH1.classList.add('d-none');
+    tbodyElement.innerHTML = '';
+
+    return tbodyElement;
+}
+
+const printTotalPrice = (total) => {
+    const totalElement = document.getElementById('total_price');
+    const finalTotalValue = roundTwoDecimals(total);
+
+    totalElement.textContent = finalTotalValue;
 }
 
 const showEmptyCart = () => {
@@ -82,4 +93,4 @@ const showEmptyCart = () => {
 }
 
 export { getDiscountPrice, createCartTableElementsForProduct, createOperationButton, createPriceWithDiscountBadgeIfNeeded,
-  appendCartChildElements, roundTwoDecimals, calculateTotal, showEmptyCart, showFullCart };
+  appendCartChildElements, calculateTotal, showEmptyCart, showFullCart, printTotalPrice };
