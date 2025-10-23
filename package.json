@@ -1,0 +1,28 @@
+{
+  "name": "itacademy-frontend-shop",
+  "version": "1.0.0",
+  "description": "ITAcademy Sprint2 - frontend shop ",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev": "vite",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neuroflip/ITAcademy-frontend-shop.git"
+  },
+  "author": "Jose A. Anguita",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neuroflip/ITAcademy-frontend-shop/issues"
+  },
+  "homepage": "https://github.com/neuroflip/ITAcademy-frontend-shop#readme",
+  "devDependencies": {
+    "install": "^0.13.0",
+    "jsdom": "^27.0.1",
+    "npm": "^11.6.2",
+    "vitest": "^4.0.1",
+    "vitest-localstorage-mock": "^0.1.2"
+  }
+}

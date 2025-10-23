@@ -68,4 +68,15 @@ The project is structured as follows:
   - when the user clicks to submit the checkout form it will be cliend side validated. If there is any error on the form data it will be shown to the user and the button will be disabled until the user enters the correct data.
 - smartphone compatible: added some bootstrap css rules to manage the flex layout of the products section to be compatible with small screens. Same for the checkout form.
 
+## Testing
+The tests are implemented using vitest. To be able to mock the localstorage usage i'm using a developement dependency with vitest-localstorage-mock.
 
+Only tested the CartListManager and dependencies:
+ - CartListManager itself
+ - and providers: CartListProviderMemory and CartListProviderLocalStorage
+
+To run the tests execute:
+
+```bash
+$ npm run test
+```

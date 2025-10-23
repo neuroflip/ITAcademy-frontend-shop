@@ -8,7 +8,7 @@ class CartListMemory {
     return this.cartList;
   }
 
-  setCardList(cartList) {
+  setCartList(cartList) {
     this.cartList = cartList;
   }
 }
