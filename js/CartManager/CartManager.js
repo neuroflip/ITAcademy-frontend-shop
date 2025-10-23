@@ -2,7 +2,7 @@ import products from "../../data/products.js";
 import { getDiscountPrice } from "./cartUtilities.js";
 import CartListManager from "../CartListManager/CartListManager.js";
 import CartListLocalStorage from "../CartListManager/providers/CartListProviderLocalStorage.js";
-import { createCartTableElements, createOperationColumnWithButtons, appendCartChildElements, roundTwoDecimals,
+import { createCartTableElements, appendCartChildElements, roundTwoDecimals, createOperationButton,
   calculateTotal, showEmptyCart, showFullCart } from "./cartUtilities.js";
 
 class CartManager {
@@ -86,20 +86,28 @@ class CartManager {
 
     #printProduct(product, tbodyElement) {
         const [tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation] = createCartTableElements();
+        const addCallback  = () => { this.addToCard(product.id); this.printCart() };
+        const removeCallback = () => { this.removeFromCart(product.id); this.printCart() };
+        const addButton = createOperationButton('+', addCallback);
+        const removeButton = createOperationButton('-', removeCallback);
+        const isDiscountApplied = product.subtotalWithDiscount > 0;
+
+        tdQuantity.classList.add('p-0');
 
         th.setAttribute('scope', 'row');
         th.textContent = product.name;
         tdPrice.textContent = `$${product.price}`;
-        tdQuantity.textContent = product.quantity;
-        tdSubtotalPrice.textContent = `$${roundTwoDecimals(product.subtotalWithDiscount)}`;
-        createOperationColumnWithButtons(tdOperation,
-            () => {
-                this.addToCard(product.id);
-                this.printCart();
-            }, () => {
-                this.removeFromCart(product.id);
-                this.printCart();
-            });
+        tdQuantity.textContent = product.quantity + ' ';
+        tdQuantity.appendChild(addButton);
+        tdQuantity.appendChild(removeButton);
+        tdSubtotalPrice.textContent = `$${roundTwoDecimals(isDiscountApplied ? product.subtotalWithDiscount: product.subtotal)}`;
+
+        if (isDiscountApplied) {
+            const discountImg = document.createElement('img');
+
+            discountImg.src = 'images/discount.png';
+            tdSubtotalPrice.appendChild(discountImg);
+        } 
         appendCartChildElements(tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation);
         tbodyElement.appendChild(tr);
     }
@@ -112,8 +120,11 @@ class CartManager {
                 } else {
                     product.subtotalWithDiscount = product.price * product.quantity;
                 }
+
+                product.subtotal = product.price * product.quantity;
             } else {
-                product.subtotalWithDiscount = product.price * product.quantity;
+                product.subtotalWithDiscount = 0;
+                product.subtotal = product.price * product.quantity;
             }
         });
     }

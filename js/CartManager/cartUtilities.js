@@ -11,25 +11,17 @@ const createCartTableElements = () => {
     return [tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation];
 }
 
-const createOperationButton = (text) => {
+const createOperationButton = (text, callback) => {
     const button = document.createElement('button');
 
+    button.addEventListener('click', callback);
+    button.classList.add('p-1','m-0');
     button.textContent = text;
-    button.className = `btn btn-outline-dark ${text === '-' ? 'm-1' : ''} rounded-3`;
+    button.className = `btn btn-outline-dark p-1 ${text === '-' ? 'm-1' : 'm-0'} rounded-3`;
 
     return button;
 }
 
-const createOperationColumnWithButtons = (tdOperation, addCallback, removeCallback) => {
-    const addButton = createOperationButton('+');
-    const removeButton = createOperationButton('-');
-
-    addButton.addEventListener('click', addCallback);
-    removeButton.addEventListener('click', removeCallback);
-
-    tdOperation.appendChild(addButton);
-    tdOperation.appendChild(removeButton);
-}
 const appendCartChildElements = (tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation) => {
     tr.appendChild(th);
     tr.appendChild(tdPrice);
@@ -65,5 +57,5 @@ const showEmptyCart = () => {
     modalEmptyH1.classList.remove('d-none');
 }
 
-export { getDiscountPrice, createCartTableElements, createOperationButton, createOperationColumnWithButtons, 
+export { getDiscountPrice, createCartTableElements, createOperationButton, 
   appendCartChildElements, roundTwoDecimals, calculateTotal, showEmptyCart, showFullCart };
