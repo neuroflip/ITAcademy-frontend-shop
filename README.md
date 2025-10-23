@@ -91,7 +91,8 @@ After the p2p review I decided to apply some useful UX changes requested in the 
       - the + and - buttons for quantities are now near the product quantity
       - there is a new offer badge when an offer is applied
 
-<center>![alt basic screenshot from the mopdal cartlist](https://github.com/neuroflip/ITAcademy-frontend-shop/blob/main/etc/cartList.png)</center>
+![alt basic screenshot from the mopdal cartlist](https://github.com/neuroflip/ITAcademy-frontend-shop/blob/main/etc/cartList.png)
 
 
 Thanks to the reviewer Ana! This were great tips on UX!!!
+
