@@ -6,6 +6,7 @@ This repo contains the solution for the IT Academy Sprint 2.2 Frontend Shop:
 
 ![alt basic screenshot from the project](https://github.com/neuroflip/ITAcademy-frontend-shop/blob/main/etc/screenshot.png)
 
+Take a look at the live demo at: [https://neuroflip.github.io/ITAcademy-frontend-shop/](https://neuroflip.github.io/ITAcademy-frontend-shop/)
 <br>
 
 ## Install and run
@@ -18,11 +19,15 @@ $ git clone https://github.com/neuroflip/ITAcademy-frontend-shop.git
 ```bash
 $ npm install
 ```
-3. Run the web server (instruction for mac osx):
+3. Run the web server:
+***NOTE: you will need to install and run a web server to be able to load the web page correctly. This is because the site is accessing to local storage as a persistance system and loading directly index.html into the browser you will get a CORS policy error and it will not load.***
+ - instruction for mac osx:
 ```bash
 $ python3 -m http.server 9000
 ```
-4. Load the page http:localhost:9000 at the browser
+ - instructions for Windows: look for a web server and install it. It can be https://simplewebserver.org/ or you can use IIS (the standard window web server) https://www.microsoft.com/es-es/download/details.aspx?id=48264
+
+4. Load the page using localhost and the port configured at the web server.
 
 <br>
 
@@ -61,6 +66,6 @@ The project is structured as follows:
   - if the cart list is empty, it will be reflected when the user opens the cartlist. In that case, the checkout or clean cart will not be available.
   - the form validation is done individually at every input keystroke for the input changed. If the data entered is not valid, the submit button will be disabled
   - when the user clicks to submit the checkout form it will be cliend side validated. If there is any error on the form data it will be shown to the user and the button will be disabled until the user enters the correct data.
-
+- smartphone compatible: added some bootstrap css rules to manage the flex layout of the products section to be compatible with small screens. Same for the checkout form.
 
 
