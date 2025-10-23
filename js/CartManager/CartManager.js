@@ -1,9 +1,8 @@
 import products from "../../data/products.js";
-import { getDiscountPrice } from "./cartUtilities.js";
 import CartListManager from "../CartListManager/CartListManager.js";
 import CartListLocalStorage from "../CartListManager/providers/CartListProviderLocalStorage.js";
-import { createCartTableElements, appendCartChildElements, roundTwoDecimals, createOperationButton,
-  calculateTotal, showEmptyCart, showFullCart } from "./cartUtilities.js";
+import { createCartTableElementsForProduct, appendCartChildElements, roundTwoDecimals, getDiscountPrice,
+  createPriceWithDiscountBadgeIfNeeded, calculateTotal, showEmptyCart, showFullCart } from "./cartUtilities.js";
 
 class CartManager {
     constructor() {
@@ -85,29 +84,10 @@ class CartManager {
     }
 
     #printProduct(product, tbodyElement) {
-        const [tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation] = createCartTableElements();
-        const addCallback  = () => { this.addToCard(product.id); this.printCart() };
-        const removeCallback = () => { this.removeFromCart(product.id); this.printCart() };
-        const addButton = createOperationButton('+', addCallback);
-        const removeButton = createOperationButton('-', removeCallback);
+        const [tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation] = createCartTableElementsForProduct(product);
         const isDiscountApplied = product.subtotalWithDiscount > 0;
 
-        tdQuantity.classList.add('p-0');
-
-        th.setAttribute('scope', 'row');
-        th.textContent = product.name;
-        tdPrice.textContent = `$${product.price}`;
-        tdQuantity.textContent = product.quantity + ' ';
-        tdQuantity.appendChild(addButton);
-        tdQuantity.appendChild(removeButton);
-        tdSubtotalPrice.textContent = `$${roundTwoDecimals(isDiscountApplied ? product.subtotalWithDiscount: product.subtotal)}`;
-
-        if (isDiscountApplied) {
-            const discountImg = document.createElement('img');
-
-            discountImg.src = 'images/discount.png';
-            tdSubtotalPrice.appendChild(discountImg);
-        } 
+        createPriceWithDiscountBadgeIfNeeded(isDiscountApplied, product.subtotalWithDiscount, product.subtotal, tdSubtotalPrice);
         appendCartChildElements(tr, th, tdPrice, tdQuantity, tdSubtotalPrice, tdOperation);
         tbodyElement.appendChild(tr);
     }
